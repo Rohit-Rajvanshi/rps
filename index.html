@@ -27,6 +27,7 @@
             <button class="scissors"><img src="scissors-opened-tool-shape.png" alt="scissors"></button>
         </div>
         <div class="Score"></div>
+        <div class="rt"></div>
         <div class="Winner"></div>
     </div>
     <script>
@@ -40,7 +41,7 @@
         let playerScore=0;
         let computerScore=0;
         let rounds = 0;
-        const maxRounds = 10; 
+        const maxRounds = 20; 
         const buttons = document.querySelectorAll("button");
 
         function playRound(playerSelection){
@@ -66,11 +67,16 @@
             if (result.includes("You win")) {
                 playerScore++;
             }
+            else if  (result.includes("It")){
+                playerSelection;
+                computerSelection;
+            }
             else {
-                computerScore++;
+                computerScore++
             }
 
             updateUI(result);
+            updateRT(result);
 
             rounds++;
             if (rounds >= maxRounds) {
@@ -83,12 +89,16 @@
             scores.textContent = `Player Score: ${playerScore} | Computer Score: ${computerScore}`;
 
             if (playerScore >= 5) {
-                document.querySelector(".Winner").textContent = "Player Won!";
+                document.querySelector(".Winner").textContent = "You my friend just won the Ultimate showdown";
                 endGame();
             } else if (computerScore >= 5) {
-                document.querySelector(".Winner").textContent = "Computer Won!";
+                document.querySelector(".Winner").textContent = "You tried , better luck next time";
                 endGame();
             }
+        }
+        function updateRT(result){
+            const rt=document.querySelector(".rt");
+            rt.textContent=result
         }
 
         function endGame() {
